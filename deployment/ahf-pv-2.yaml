@@ -1,0 +1,33 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: tsig-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 50Mi
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: local-storage
+  hostPath:
+    path: "/tmp/ahf/tsig"
+    
+ ---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: tls-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 50Mi
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: local-storage
+  hostPath:
+    path: "/tmp/ahf/tls"
+ 

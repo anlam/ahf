@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: glassfish-service
+spec:
+  selector:
+    app: ahf
+    role: glassfish
+  ports:
+  - name: port1
+    port: 8080
+    targetPort: 8080
+    nodePort: 30080
+  - name: port2
+    port: 8181
+    targetPort: 8181
+    nodePort: 30081
+  - name: port3
+    port: 4848
+    targetPort: 4848
+    nodePort: 30048
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: glassfish-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ahf
+      role: glassfish
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ahf
+        role: glassfish
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - cloud4
+      hostname: glassfish
+      subdomain: ahf-hiof
+      containers:
+      - name: glassfish
+        image: anlam/arrowhead:glassfish
+        env:
+        - name: LOCK_OUT_DIR
+          value: "false"
+        - name: GLASSFISH_ADMIN
+          value: "admin"
+        - name: GLASSFISH_PASSWORD
+          value: "pass"
+        - name: KEYSTORE_PASSWORD
+          value: "changeit" 
+        - name: TESTER_KEYSTORE_PASSWORD
+          value: "changeit"
+        - name: DNS_SERVER
+          value: "dns.ahf-hiof.res-lec.svc.cluster.local"
+        ports:
+        - containerPort: 8080
+        - containerPort: 8181
+        - containerPort: 4848
+        volumeMounts:
+        - name: tsig-volume
+          mountPath: /tsig
+        - name: tls-volume
+          mountPath: /tls
+      volumes:
+        - name: tsig-volume
+          persistentVolumeClaim:
+            claimName: tsig-pvc
+        - name: tls-volume
+          persistentVolumeClaim:
+            claimName: tls-pvc
+            
+        
