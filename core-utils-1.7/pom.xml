@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>se.bnearit.arrowhead.common</groupId>
+	<artifactId>core-utils</artifactId>
+	<version>1.7</version>
+	<packaging>jar</packaging>
+	<name>Core Utils</name>
+	<description>Utils for core services</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>9.1.0.M0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+			<version>9.1.0.M0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.8</version>
+		</dependency>
+ 		<dependency>
+			<groupId>com.github.danieln.dnssdjava</groupId>
+			<artifactId>dnssdjava</artifactId>
+			<version>1.0-beta7</version>
+		</dependency> 
+                <dependency>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                    <version>1.2.16</version>
+                </dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<extensions>
+			<extension>
+				<!-- Behövs för bit-repo som använder WebDAV -->
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>2.4</version>
+			</extension>
+		</extensions>
+                
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+	</build>
+
+	<scm>
+		<connection>scm:svn:https://svn.bnearit.se/Arrowhead/code/common/core-utils/tags/core-utils-1.7</connection>
+	</scm>
+
+	<distributionManagement> 
+		<repository>
+			<id>bit-repo</id>
+			<name>BnearIT release repository</name>
+			<url>dav:https://maven.bnearit.se/bit-repo</url>
+		</repository>
+	</distributionManagement>
+
+</project>
