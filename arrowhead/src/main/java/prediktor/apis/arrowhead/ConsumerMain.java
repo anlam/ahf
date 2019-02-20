@@ -112,7 +112,7 @@ public class ConsumerMain {
     //When true, the Service Registry will only providers with the same exact metadata map as the consumer
     orchestrationFlags.put("metadataSearch", false);
     //When true, the Orchestrator can turn to the Gatekeeper to initiate interCloud orchestration, if the Local Cloud had no adequate provider
-    orchestrationFlags.put("enableInterCloud", false);
+    orchestrationFlags.put("enableInterCloud", true);
     
     //orchestrationFlags.put("triggerInterCloud", false);
 
