@@ -8,7 +8,8 @@
 
 <https://arrowhead.eu/arrowheadtools/sai> rdf:type owl:Ontology ;
                                            owl:versionIRI <https://arrowhead.eu/arrowheadtools/sai/1.0.0> ;
-                                           owl:imports <http://www.w3.org/ns/sosa/> .
+                                           owl:imports <http://www.w3.org/ns/sosa/> ,
+                                                       <http://www.w3.org/ns/ssn/> .
 
 #################################################################
 #    Object Properties
